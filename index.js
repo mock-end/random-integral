@@ -31,8 +31,8 @@ module.exports = function (min, max) {
 
   } else if (length === 1) {
 
-    min = MIN_SAFE_INTEGER;
     max = fixme(min);
+    min = MIN_SAFE_INTEGER;
 
   } else {
 

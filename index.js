@@ -1,24 +1,22 @@
 'use strict';
 
-var clamp     = require('clamp');
-var toInteger = require('to-integer');
+var clamp        = require('clamp');
+var toInteger    = require('to-integer');
+var MAX_SAFE_INT = require('max-safe-int');
+var MIN_SAFE_INT = -MAX_SAFE_INT;
 
-
-var MAX_SAFE_INTEGER = 9007199254740991;
-var MIN_SAFE_INTEGER = -MAX_SAFE_INTEGER;
-
-
-function fixme(val) {
+function fixme(val, min) {
 
   if (typeof val !== 'number') {
     val = toInteger(val);
   }
 
-  val = isNaN(val) || !isFinite(val) ? 0 : val;
+  if (isNaN(val) || !isFinite(val)) {
+    val = min ? MIN_SAFE_INT : MAX_SAFE_INT;
+  }
 
-  return clamp(val, MIN_SAFE_INTEGER, MAX_SAFE_INTEGER);
+  return clamp(val, MIN_SAFE_INT, MAX_SAFE_INT);
 }
-
 
 module.exports = function (min, max) {
 
@@ -26,18 +24,18 @@ module.exports = function (min, max) {
 
   if (length === 0) {
 
-    min = MIN_SAFE_INTEGER;
-    max = MAX_SAFE_INTEGER;
+    min = MIN_SAFE_INT;
+    max = MAX_SAFE_INT;
 
   } else if (length === 1) {
 
     max = fixme(min);
-    min = MIN_SAFE_INTEGER;
+    min = MIN_SAFE_INT;
 
   } else {
 
-    min = fixme(min);
-    max = fixme(max);
+    min = fixme(min, true);
+    max = fixme(max, false);
 
   }
 

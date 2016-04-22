@@ -29,7 +29,7 @@ module.exports = function (min, max) {
 
   } else if (length === 1) {
 
-    max = fixme(min);
+    max = fixme(min, false);
     min = MIN_SAFE_INT;
 
   } else {

@@ -26,7 +26,7 @@ var randomInt = require('random-integral');
 // - randomInt([options])
 ```
 
-By default it will return a integer between `-9007199254740992` and `9007199254740992`:
+By default it will return an integer between `-9007199254740992` and `9007199254740992`:
 
 ```js
 randomInt();
@@ -50,7 +50,7 @@ randomInt({ min: -100, max: -10 });
 
 These `min` and `max` are **inclusive**, so they are included in the range.
 
-This means `randomInt(-2, 2)` would return either `-2`, `-1`, `0`, `1`, or `2`.
+This means `randomInt({ min: -2, max: 2 })` would return either `-2`, `-1`, `0`, `1`, or `2`.
 
 ```js
 // Specific case

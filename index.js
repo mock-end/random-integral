@@ -5,24 +5,27 @@ var toInteger    = require('to-integer');
 var MAX_SAFE_INT = require('max-safe-int');
 var MIN_SAFE_INT = -MAX_SAFE_INT;
 
-function fixme(val, min) {
+function fixme(val, min, max, isMin) {
 
   if (typeof val !== 'number') {
     val = toInteger(val);
   }
 
   if (isNaN(val) || !isFinite(val)) {
-    val = min ? MIN_SAFE_INT : MAX_SAFE_INT;
+    return isMin ? min : max;
   }
 
-  return clamp(val, MIN_SAFE_INT, MAX_SAFE_INT);
+  return clamp(val, min, max);
 }
 
 module.exports = function (options) {
 
   if (options) {
-    options.min = fixme(options.min, true);
-    options.max = fixme(options.max, false);
+    // for speed up
+    if (!options.inspected) {
+      options.min = fixme(options.min, MIN_SAFE_INT, MAX_SAFE_INT, true);
+      options.max = fixme(options.max, MIN_SAFE_INT, MAX_SAFE_INT, false);
+    }
   } else {
     options = {
       min: MIN_SAFE_INT,
@@ -43,3 +46,5 @@ module.exports = function (options) {
 
   return Math.round(Math.random() * (max - min)) + min;
 };
+
+module.exports.fixme = fixme;

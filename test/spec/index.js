@@ -33,8 +33,8 @@ describe('random-integral', function () {
     expect(randomInt({ min: 0, max: 0 })).to.equal(0);
   });
 
-  it('randomInt({ min: 1, max: 1 }) should always be 1', function () {
-    expect(randomInt({ min: 1, max: 1 })).to.equal(1);
+  it('randomInt({ min: 1, max: 1, inspected: true }) should always be 1', function () {
+    expect(randomInt({ min: 1, max: 1, inspected: true })).to.equal(1);
   });
 
   it('randomInt({ min: -1, max: -1 }) should always be -1', function () {

@@ -18,26 +18,20 @@ function fixme(val, min) {
   return clamp(val, MIN_SAFE_INT, MAX_SAFE_INT);
 }
 
-module.exports = function (min, max) {
+module.exports = function (options) {
 
-  var length = arguments.length;
-
-  if (length === 0) {
-
-    min = MIN_SAFE_INT;
-    max = MAX_SAFE_INT;
-
-  } else if (length === 1) {
-
-    max = fixme(min, false);
-    min = MIN_SAFE_INT;
-
+  if (options) {
+    options.min = fixme(options.min, true);
+    options.max = fixme(options.max, false);
   } else {
-
-    min = fixme(min, true);
-    max = fixme(max, false);
-
+    options = {
+      min: MIN_SAFE_INT,
+      max: MAX_SAFE_INT
+    };
   }
+
+  var min = options.min;
+  var max = options.max;
 
   // swap to variables
   // ref: http://stackoverflow.com/a/16201688

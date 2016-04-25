@@ -1,6 +1,6 @@
 {
   "name": "random-integral",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Return a random integer.",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,6 @@
   "keywords": [
     "int",
     "integer",
-    "num",
     "number",
     "generator",
     "generate",

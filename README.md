@@ -24,6 +24,10 @@ var randomInt = require('random-integral');
 
 // API
 // - randomInt([options])
+
+// options
+// - min
+// - max
 ```
 
 By default it will return an integer between `-9007199254740992` and `9007199254740992`:
